@@ -1,12 +1,41 @@
+[//]: # (Image References)
+
+[vanilla_dqn]: ./vanilla_dqn.png "Vanilla DQN"
+[double_dqn]: ./double_dqn.png "Double DQN"
+[double_dueling_dqn]: ./double_dueling_dqn.png "Double Dueling DQN"
+[dueling_ddqn_per]: ./dueling_ddqn_per.png "Double Dueling DQN with PER"
+
+# Project 1: Navigation
+
 # Project Implementation
 
 ## Algorithm
 
-For the project I implemented the following algorithms:
+The following variants were implemented:
 * vanilla DQN
 * double DQN
 * dueling DQN
 * prioritized experience replay
+
+## Model
+
+The Q Network model is defined in `model.QNetwork`, with 2 fully-connected layers
+of 64 neurons each followed by RELU activation. For the output layer, in the
+case of vanilla DQN or double DQN, another fully-connected layer of `action_size`
+neurons is used. In the case of dueling DQN, the output of the second RELU activation
+is split into a value stream of size 1, and a advantage stream of size `action_size`.
+The two stream are then combined and with the mean of the advantage stream subtracted
+to maintain identifiability.
+
+## Agent
+
+The DQN Agent is defined in `agent.Agent`. The agent handles the learning process
+in `Agent.learn()`, where Double DQN and Prioritized Experience Replay update logic
+are implemented. 
+
+The Prioritized Experience Replay buffer is extended on top of the `Agent.ReplayBuffer`
+class, where a sum tree and a minimum tree are used to efficiently maintain and update
+the priorities for sampling.
 
 ## Hyperparameters
 
@@ -26,9 +55,20 @@ Following hyperparameters were used:
 ## Results
 
 Vanilla DQN: solved in 549 episodes
+
+![Vanilla DQN][vanilla_dqn]
+
 Double DQN: solved in 594 episodes
+
+![Double DQN][double_dqn]
+
 Dueling Double DQN: solved in 540 episodes (weights saved to `checkpoint.pth`)
+
+![Dueling Double DQN][double_dueling_dqn]
+
 Dueling Double DQN with PER: solved in 649 episodes
+
+![Double Dueling DQN with PER][dueling_ddqn_per]
 
 ## Observation
 

@@ -20,7 +20,7 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 
 The task is episodic, and in order to solve the environment, your agent must get an average score of +13 over 100 consecutive episodes.
 
-### Project Details
+### Project Files
 
 `model.py` - PyTorch model of the Q Network
 
@@ -29,3 +29,14 @@ The task is episodic, and in order to solve the environment, your agent must get
 `Navigation.ipynb` - Jupyter notebook with training and visualization code
 
 `checkpoint.pth` - Final saved PyTorch checkpoint
+
+### Getting Started
+
+Install dependencies by running `pip install -r requirements.txt`.
+
+Run or modify the learning process with `jupyter notebook` -> `Navigation.ipynb`.
+
+Enabling variants:
+* Double DQN - set `doubleQ=True` when initializing `Agent`
+* Dueling DQN - set `dueling=True` when initializing `Agent`
+* Prioritized Experience Replay - set `per=True` when initializing `Agent`
